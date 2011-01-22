@@ -1,0 +1,43 @@
+
+
+  Variables names and type conventions.
+
+    s0 s1 s2 ... sN          :  ByteString
+
+    p0 p1 p2 ... pN          :  FS.Path
+    t0 t1 t2 ... tN          :  FS.Type
+    m0 m1 m2 ... mN          :  FS.Mode
+
+    u0 u1 u2 ... uN          :  PW.User
+    g0 g1 g2 ... gN          :  PW.Group
+
+
+  Primitive functions:
+
+    contents                 :  FS.Path → ByteString
+    parent                   :  FS.Path → FS.Path
+    user                     :  FS.Path → PW.User
+    group                    :  FS.Path → PW.Group
+    mode                     :  FS.Path → FS.Mode
+    type                     :  FS.Path → FS.Type
+    links                    :  FS.Path → FS.Path → Bool
+
+    home                     :  PW.User → FS.Path
+    primary_group            :  PW.User → PW.Group
+    members                  :  PW.Group → Set PW.User
+
+    ∈                        :  t → Set t → Bool
+    ∃                        :  t → Bool
+    ∨                        :  Bool → Bool
+    ∧                        :  Bool → Bool
+
+
+  Basic relations and their implications (two-valued logic):
+
+    ∃ p0                     ⇒  ∃ parent p0  ∧  type (parent p0) = Dir
+    contents p0 = s0         ⇒  type p0 = File
+    u0 ∈ members g0          ⇒  ∃ u0  ∧  ∃ g0
+    links source target      ⇒  type (parent source) = Dir
+                             ∧  type target = Link
+
+
