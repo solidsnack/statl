@@ -1,5 +1,8 @@
 
 
+
+
+
   Variables names and type conventions.
 
     s0 s1 s2 ... sN          :  ByteString
@@ -12,6 +15,8 @@
     g0 g1 g2 ... gN          :  PW.Group
 
 
+
+
   Primitive functions:
 
     contents                 :  FS.Path → ByteString
@@ -21,6 +26,10 @@
     mode                     :  FS.Path → FS.Mode
     type                     :  FS.Path → FS.Type
     links                    :  FS.Path → FS.Path
+    ≼                        :  FS.Mode → FS.Mode → Bool
+
+  A note about the last operator: file modes can be "less defined" than other
+  modes, in the sense they are ambivalent about some bits in the final mode.
 
     home                     :  PW.User → FS.Path
     primary_group            :  PW.User → PW.Group
@@ -32,7 +41,9 @@
     ∧                        :  Bool → Bool
 
 
-  Basic relations and their implications (two-valued logic):
+
+
+  Basic relations and their implications:
 
     ∃ p0                     ⇒  ∃ parent p0
                              ∧  type (parent p0) = Dir
@@ -42,11 +53,17 @@
     links source = target    ⇒  type (parent source) = Dir
                              ∧  type target = Link
 
+  These may all be thought of as compositions of Boolean expressions.
+
+
+
 
   Actions and their implications:
 
     {} ⊢ TOUCH p0            ⇒  ∃ p0  ∧  type p0 = File
     {} ⊢ MKDIR p0            ⇒  ∃ p0  ∧  type p0 = Dir
     {} ⊢ CHMOD m0 p0         ⇒  ∃ p0  ∧  m0 ≼ mode p0
+
+
 
 
