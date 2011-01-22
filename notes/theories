@@ -20,7 +20,7 @@
     group                    :  FS.Path → PW.Group
     mode                     :  FS.Path → FS.Mode
     type                     :  FS.Path → FS.Type
-    links                    :  FS.Path → FS.Path → Bool
+    links                    :  FS.Path → FS.Path
 
     home                     :  PW.User → FS.Path
     primary_group            :  PW.User → PW.Group
@@ -34,10 +34,19 @@
 
   Basic relations and their implications (two-valued logic):
 
-    ∃ p0                     ⇒  ∃ parent p0  ∧  type (parent p0) = Dir
+    ∃ p0                     ⇒  ∃ parent p0
+                             ∧  type (parent p0) = Dir
+                             ∧  type p0
     contents p0 = s0         ⇒  type p0 = File
     u0 ∈ members g0          ⇒  ∃ u0  ∧  ∃ g0
-    links source target      ⇒  type (parent source) = Dir
+    links source = target    ⇒  type (parent source) = Dir
                              ∧  type target = Link
+
+
+  Actions and their implications:
+
+    {} ⊢ TOUCH p0            ⇒  ∃ p0  ∧  type p0 = File
+    {} ⊢ MKDIR p0            ⇒  ∃ p0  ∧  type p0 = Dir
+    {} ⊢ CHMOD m0 p0         ⇒  ∃ p0  ∧  m0 ≼ mode p0
 
 
