@@ -29,7 +29,8 @@
     ≼                        :  FS.Mode → FS.Mode → Bool
 
   A note about the last operator: file modes can be "less defined" than other
-  modes, in the sense they are ambivalent about some bits in the final mode.
+  modes, in the sense that they are ambivalent about some bits in the final
+  mode.
 
     home                     :  PW.User → FS.Path
     primary_group            :  PW.User → PW.Group
