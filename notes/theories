@@ -48,7 +48,6 @@
 
     ∃ p0                     ⇒  ∃ parent p0
                              ∧  type (parent p0) = Dir
-                             ∧  type p0
     contents p0 = s0         ⇒  type p0 = File
     u0 ∈ members g0          ⇒  ∃ u0  ∧  ∃ g0
     links source = target    ⇒  type (parent source) = Dir
@@ -61,10 +60,17 @@
 
   Actions and their implications:
 
+
+    {∃ p0} ⊢ CHOWN p0 o0     ⇒  o0 ≼ ownership p0
+    {∃ p0} ⊢ CHMOD p0 m0     ⇒  m0 ≼ mode p0
+    {} ⊢ RM p0               ⇒  ̷∃ p0
+    {} ⊢ CP p1 p0
+    {} ⊢ LNs p1 p0           ⇒  ∃ p0  ∧  links p0 = p1
     {} ⊢ TOUCH p0            ⇒  ∃ p0  ∧  type p0 = File
     {} ⊢ MKDIR p0            ⇒  ∃ p0  ∧  type p0 = Dir
-    {} ⊢ CHMOD m0 p0         ⇒  ∃ p0  ∧  m0 ≼ mode p0
-
-
-
+    {} ⊢ USERADD UNick UserAttrs
+    {} ⊢ USERDEL UNick
+    {} ⊢ GROUPADD GNick GroupAttrs
+    {} ⊢ GROUPDEL GNick
+    {} ⊢ GPASSWDm GNick (Set UNick) (Set UNick)
 
